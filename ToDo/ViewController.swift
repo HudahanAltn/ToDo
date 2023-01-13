@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //connect our tableview with viewcontroller
         toDoTableView.delegate = self
         toDoTableView.dataSource = self
     }
@@ -25,7 +26,7 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController:UITableViewDataSource,UITableViewDelegate{
+extension ViewController:UITableViewDataSource,UITableViewDelegate{//add delegate and data source method
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -44,5 +45,24 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
         cell.textLabel?.text = doItemList[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print(doItemList[indexPath.row])
+        
+        //we will control that has the cell checkmark?
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+            
+            //yes we delete checkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }else{
+            //no we add checkkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+        
+
+
+        tableView.deselectRow(at: indexPath, animated: true)//when clicked the cell ,we won't see anymore gray view continiously
     }
 }
