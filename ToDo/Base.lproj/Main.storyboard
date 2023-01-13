@@ -35,7 +35,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="To Do" id="DLU-5p-N3D"/>
+                    <navigationItem key="navigationItem" title="To Do" id="DLU-5p-N3D">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Isw-AV-Wq5">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="XKB-E8-AD4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="toDoTableView" destination="ffT-UA-3Pm" id="az5-h9-Y0j"/>
                     </connections>

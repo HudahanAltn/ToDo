@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var toDoTableView: UITableView!
     
-    let doItemList:[String] = ["take the dog for a walk","go shopping","buy new clothes"]
+    var doItemList:[String] = ["take the dog for a walk","go shopping","buy new clothes"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,44 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+        var newTextField = UITextField() //created to use  whole scope
+        
+        let alertController = UIAlertController(title: "Add new toDo Item", message: "", preferredStyle: .alert) // alert controller object
+        
+        let addItem = UIAlertAction(title: "Add Item", style: .default){ //alert Button
+            
+            action in
+            
+            print("action is pressed")
+            
+            if let textInAlert = newTextField.text{
+                // we added new ıtem to our list
+                self.doItemList.append(textInAlert)
+            }
+            
+            DispatchQueue.main.async { // created thread to when user add new todo , table view show us instantly
+                
+                self.toDoTableView.reloadData()
+            }
+        }
+        
+        alertController.addTextField(){ // we add textfield into alert
+            
+            
+            alertTF in
+            
+            alertTF.placeholder = "add new item"
+            
+            newTextField = alertTF // copy alertTF to newTextField that created the beginning of scope
+            
+        }
+        
+        alertController.addAction(addItem)
+        
+        self.present(alertController, animated: true)
+    }
 }
 
 
